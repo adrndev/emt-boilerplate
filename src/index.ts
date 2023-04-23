@@ -29,7 +29,7 @@ app.use('/public', express.static('public'));
 
 // Error handling middleware function
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  console.error(err.message);
+  console.error(err.stack);
   res.status(err.statusCode ?? 500).send({ message: err.message });
 };
 

@@ -1,12 +1,19 @@
 import { Schema, model, Document, Types } from 'mongoose';
 import isEmail from 'validator/lib/isEmail';
 
+export enum Role {
+  USER = 'USER_ROLE',
+  ADMIN = 'ADMIN_ROLE'
+}
+
 export interface IUser extends Document {
+  _id: Types.ObjectId
   name: string;
   email: string;
   password: string;
   createdAt: Date;
   pictureUrl: String;
+  role: Role
 }
 
 const UserSchema = new Schema<IUser>({
@@ -38,6 +45,11 @@ const UserSchema = new Schema<IUser>({
   },
   pictureUrl: {
     type: String
+  },
+  role: {
+    type: String,
+    enum: Role,
+    default: Role.USER
   }
 });
 

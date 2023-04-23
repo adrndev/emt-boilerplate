@@ -23,8 +23,6 @@ export default {
   create: async (req: Request, res: Response): Promise<void> => {
     const { name, email, password, confirmPassword, pictureUrl } = req.body;
 
-    console.log(password, confirmPassword);
-
     User.schema.path('name').validate(async (value) => {
       return !(await User.countDocuments({ name: value }));
     }, 'Name already in use');
